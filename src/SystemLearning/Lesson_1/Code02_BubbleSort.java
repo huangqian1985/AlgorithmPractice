@@ -1,33 +1,27 @@
 package SystemLearning.Lesson_1;
 
-import java.util.Arrays;
-
 import static SystemLearning.Common.ArrayFunction.*;
+import static SystemLearning.Common.ArrayFunction.printArray;
+import static SystemLearning.Lesson_1.Code01_SelectionSort.selectionSort;
 
-public class Code01_SelectionSort {
+public class Code02_BubbleSort {
 
-    public static void selectionSort(int[] arr) {
+    public static void bubbleSort(int arr[]) {
         if (arr == null || arr.length < 2) {
             return;
         }
 
-        // 找到 0 到 N-1 位置最小的数, 和 0 位置的数交换
-        // 找到 1 到 N-1 位置最小的数, 和 1 位置的数交换
-        // ...
-        int min = Integer.MAX_VALUE;
         for (int i = 0; i < arr.length; i++) {
-            int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
-            }
-            // 如果 i == minIndex, 那么 i 位置就是当前的最小值
-            if (i != minIndex) {
-                Swap(arr, i, minIndex);
+                if (arr[i] > arr[j]) {
+                    Swap(arr, i, j);
+                }
             }
         }
     }
 
     public static void main(String[] args) {
+        long curTime = System.currentTimeMillis();
         int testTime = 500000;
         int maxSize = 100;
         int maxValue = 100;
@@ -45,5 +39,6 @@ public class Code01_SelectionSort {
             }
         }
         System.out.println(succeed ? "Nice!" : "Fucking fucked!");
+        System.out.println("总共耗时:" + (System.currentTimeMillis() - curTime));
     }
 }
