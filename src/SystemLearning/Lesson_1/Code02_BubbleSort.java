@@ -1,8 +1,6 @@
 package SystemLearning.Lesson_1;
 
-import static SystemLearning.Common.ArrayFunction.*;
-import static SystemLearning.Common.ArrayFunction.printArray;
-import static SystemLearning.Lesson_1.Code01_SelectionSort.selectionSort;
+import SystemLearning.Common.ArrayFunction;
 
 public class Code02_BubbleSort {
 
@@ -14,7 +12,7 @@ public class Code02_BubbleSort {
         for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] > arr[j]) {
-                    Swap(arr, i, j);
+                    ArrayFunction.Swap(arr, i, j);
                 }
             }
         }
@@ -27,14 +25,14 @@ public class Code02_BubbleSort {
         int maxValue = 100;
         boolean succeed = true;
         for (int i = 0; i < testTime; i++) {
-            int[] arr1 = generateRandomArray(maxSize, maxValue);
-            int[] arr2 = copyArray(arr1);
-            selectionSort(arr1);
-            comparator(arr2);
-            if (!isEqual(arr1, arr2)) {
+            int[] arr1 = ArrayFunction.generateRandomArray(maxSize, maxValue);
+            int[] arr2 = ArrayFunction.copyArray(arr1);
+            bubbleSort(arr1);
+            ArrayFunction.comparator(arr2);
+            if (!ArrayFunction.isEqual(arr1, arr2)) {
                 succeed = false;
-                printArray(arr1);
-                printArray(arr2);
+                ArrayFunction.printArray(arr1);
+                ArrayFunction.printArray(arr2);
                 break;
             }
         }
