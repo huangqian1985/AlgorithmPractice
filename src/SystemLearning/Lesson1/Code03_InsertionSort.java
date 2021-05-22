@@ -1,20 +1,18 @@
-package SystemLearning.Lesson_1;
+package SystemLearning.Lesson1;
 
 import SystemLearning.Common.ArrayFunction;
 
-// 冒泡排序
-public class Code02_BubbleSort {
+// 插入排序
+public class Code03_InsertionSort {
     // 时间复杂度 O(N平方)
-    public static void bubbleSort(int arr[]) {
+    public static void insertionSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] > arr[j]) {
-                    ArrayFunction.Swap(arr, i, j);
-                }
+        for (int i = 1; i < arr.length; i++) {
+            for (int j = i-1; j >= 0 && arr[j] > arr[j+1]; j--) {
+                ArrayFunction.Swap(arr, j, j+1);
             }
         }
     }
@@ -28,7 +26,7 @@ public class Code02_BubbleSort {
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = ArrayFunction.generateRandomArray(maxSize, maxValue);
             int[] arr2 = ArrayFunction.copyArray(arr1);
-            bubbleSort(arr1);
+            insertionSort(arr1);
             ArrayFunction.comparator(arr2);
             if (!ArrayFunction.isEqual(arr1, arr2)) {
                 succeed = false;

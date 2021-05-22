@@ -1,4 +1,4 @@
-package SystemLearning.Lesson_1;
+package SystemLearning.Lesson1;
 
 import SystemLearning.Common.ArrayFunction;
 

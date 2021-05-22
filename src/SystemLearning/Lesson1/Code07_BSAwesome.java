@@ -1,10 +1,10 @@
-package SystemLearning.Lesson_1;
+package SystemLearning.Lesson1;
 
 /**
  *  局部最小值问题
  *  1. 无序数组, 相邻位置的2个数不相等, 求数组内任意局部最小的值的Index
  *
- *  时间复杂度
+ *  时间复杂度 O(logN)
  */
 public class Code07_BSAwesome {
 
