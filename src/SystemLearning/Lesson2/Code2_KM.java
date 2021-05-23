@@ -11,7 +11,7 @@ public class Code2_KM {
 	 * M > 1,  K < M
 	 * 找到，出现了K次的数，
 	 * 要求，额外空间复杂度O(1)，时间复杂度O(N)
-	 * <p>
+	 *
 	 * 思路:
 	 * 1. 	使用一个int[32]的数组, 存放所有的数的二进制位数上出现过1的次数, 例如 3(0011)出现2次, 4(0100)出现3次, 5(0101)出现3次
 	 * 那么数组的值就是[..., 0, 6, 2, 5], 因为 K < M, 所以数组的每一位的值 % M 的结果不等于0, 那么那个数在这个位置上就是 1
@@ -65,7 +65,7 @@ public class Code2_KM {
 
 			int onlyKTimesNum = onlyKTimes(arr, k, m);
 			int testNum = test(arr, k, m);
-			System.out.println("onlyKTimesNum :"+onlyKTimesNum+" testNum:" + testNum);
+//			System.out.println("onlyKTimesNum :"+onlyKTimesNum+" testNum:" + testNum);
 			if (onlyKTimesNum != testNum) {
 				System.out.println("ERROR");
 				break;
@@ -129,7 +129,7 @@ public class Code2_KM {
 				arr[index++] = mnum;
 			}
 		}
-		System.out.println(Arrays.toString(arr));
+//		System.out.println(Arrays.toString(arr));
 		return arr;
 	}
 
