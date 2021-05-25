@@ -1,20 +1,27 @@
-package SystemLearning.Lesson1;
+package Lesson1;
 
-import SystemLearning.Common.ArrayFunction;
+import Common.ArrayFunction;
 
-// 冒泡排序
-public class Code02_BubbleSort {
+// 选择排序
+public class Code01_SelectionSort {
     // 时间复杂度 O(N平方)
-    public static void bubbleSort(int arr[]) {
+    public static void selectionSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
 
+        // 找到 0 到 N-1 位置最小的数, 和 0 位置的数交换
+        // 找到 1 到 N-1 位置最小的数, 和 1 位置的数交换
+        // ...
+        int min = Integer.MAX_VALUE;
         for (int i = 0; i < arr.length; i++) {
+            int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[i] > arr[j]) {
-                    ArrayFunction.Swap(arr, i, j);
-                }
+                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+            }
+            // 如果 i == minIndex, 那么 i 位置就是当前的最小值
+            if (i != minIndex) {
+                ArrayFunction.Swap(arr, i, minIndex);
             }
         }
     }
@@ -28,7 +35,7 @@ public class Code02_BubbleSort {
         for (int i = 0; i < testTime; i++) {
             int[] arr1 = ArrayFunction.generateRandomArray(maxSize, maxValue);
             int[] arr2 = ArrayFunction.copyArray(arr1);
-            bubbleSort(arr1);
+            selectionSort(arr1);
             ArrayFunction.comparator(arr2);
             if (!ArrayFunction.isEqual(arr1, arr2)) {
                 succeed = false;

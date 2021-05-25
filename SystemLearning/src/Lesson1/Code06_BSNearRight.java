@@ -1,6 +1,6 @@
-package SystemLearning.Lesson1;
+package Lesson1;
 
-import SystemLearning.Common.ArrayFunction;
+import Common.ArrayFunction;
 
 import java.util.Arrays;
 

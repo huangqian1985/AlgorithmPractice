@@ -1,6 +1,6 @@
-package SystemLearning.Lesson1;
+package Lesson1;
 
-import SystemLearning.Common.ArrayFunction;
+import Common.ArrayFunction;
 
 // 插入排序
 public class Code03_InsertionSort {

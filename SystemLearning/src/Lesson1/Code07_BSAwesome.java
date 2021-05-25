@@ -1,4 +1,4 @@
-package SystemLearning.Lesson1;
+package Lesson1;
 
 /**
  *  局部最小值问题

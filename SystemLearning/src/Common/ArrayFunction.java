@@ -1,4 +1,4 @@
-package SystemLearning.Common;
+package Common;
 
 import java.util.Arrays;
 

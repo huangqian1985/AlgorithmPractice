@@ -1,4 +1,4 @@
-package SystemLearning.Lesson2;
+package Lesson2;
 
 /**
  * 	异或处理习题

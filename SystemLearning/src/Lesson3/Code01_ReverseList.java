@@ -1,4 +1,4 @@
-package SystemLearning.Lesson3;
+package Lesson3;
 
 import java.util.ArrayList;
 import java.util.List;
