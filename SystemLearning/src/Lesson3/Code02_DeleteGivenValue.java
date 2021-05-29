@@ -1,18 +1,11 @@
 package Lesson3;
 
-import java.util.ArrayList;
+import Common.NodeFunction.*;
+import static Common.NodeFunction.*;
+
+import java.util.LinkedList;
 
 public class Code02_DeleteGivenValue {
-
-	// 单链表结构
-	public static class Node {
-		public int value;
-		public Node next;
-
-		public Node(int data) {
-			value = data;
-		}
-	}
 
 	/**
 	 *		删除链表所有等于某个值的元素
@@ -27,6 +20,9 @@ public class Code02_DeleteGivenValue {
 		// 如果头结点就是要删除的节点, 那么要找到新的头节点
 		while (head.value == num) {
 			head = head.next;
+			// 如果head是唯一节点, 而且删除的值就是head
+			if (head == null)
+				break;
 		}
 
 		//
@@ -45,8 +41,56 @@ public class Code02_DeleteGivenValue {
 		return head;
 	}
 
-	public static void main(String[] args) {
+	/**
+	 *	对数器
+	 */
+	public static LinkedList<Node> testRemoveValue(Node head, int num) {
+		LinkedList<Node> list = new LinkedList<>();
+		while (head != null) {
+			if (head.value != num) {
+				list.add(new Node(head.value));
+			}
+			head = head.next;
+		}
+		return list;
+	}
 
+	public static boolean checkEquals( LinkedList<Node> list, Node head ) {
+		for (Node n : list) {
+			if (head == null) {
+				return false;
+			}
+
+			if (n.value != head.value) {
+				return false;
+			}
+
+			head = head.next;
+		}
+		return true;
+	}
+
+	public static void main(String[] args) {
+		int len = 50;
+		int value = 100;
+		int testTime = 100000;
+		System.out.println("test begin!");
+		for (int i = 0; i < testTime; i++) {
+			Node head = generateRandomLinkedList(len, value);
+			if (head == null) {
+				System.out.println("head == null");
+				continue;
+			}
+
+			LinkedList<Node> list = testRemoveValue(head, head.value);
+			Node resultNode = removeValue(head, head.value);
+
+			if ( !checkEquals(list, resultNode) ) {
+				System.out.println("test Failed!");
+				break;
+			}
+		}
+		System.out.println("test finish!");
 	}
 }
 
