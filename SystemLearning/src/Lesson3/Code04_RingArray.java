@@ -36,6 +36,19 @@ public class Code04_RingArray {
 			}
 			return arr[--index];
 		}
+
+		public int peek() {
+			if (index <= 0) {
+				System.out.println("堆栈为空");
+				return Integer.MIN_VALUE;
+			}
+			int getIndex= index - 1;
+			return arr[getIndex];
+		}
+
+		public boolean isEmpty() {
+			return index == 0;
+		}
 	}
 
 	/*
