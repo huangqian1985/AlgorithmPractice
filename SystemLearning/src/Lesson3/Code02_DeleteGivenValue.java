@@ -1,8 +1,8 @@
 package Lesson3;
 
-import Common.NodeFunction.*;
 import static Common.NodeFunction.*;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Code02_DeleteGivenValue {
@@ -21,8 +21,9 @@ public class Code02_DeleteGivenValue {
 		while (head.value == num) {
 			head = head.next;
 			// 如果head是唯一节点, 而且删除的值就是head
-			if (head == null)
+			if (head == null) {
 				break;
+			}
 		}
 
 		//
@@ -93,4 +94,3 @@ public class Code02_DeleteGivenValue {
 		System.out.println("test finish!");
 	}
 }
-

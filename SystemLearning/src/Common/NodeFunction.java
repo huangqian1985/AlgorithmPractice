@@ -22,11 +22,22 @@ public class NodeFunction {
 		}
 	}
 
+	// 双链表泛型
+	public static class DoubleNodeT<T> {
+		public T value;
+		public DoubleNodeT<T> pre;
+		public DoubleNodeT<T> next;
+
+		public DoubleNodeT(T data) {
+			value = data;
+		}
+	}
+
 	// for test
 	public static Node generateRandomLinkedList(int len, int value) {
 		int size = (int) (Math.random() * (len + 1));
 		if (size == 0) {
-			return null;
+			size = 1;
 		}
 		size--;
 		Node head = new Node((int) (Math.random() * (value + 1)));
@@ -44,7 +55,7 @@ public class NodeFunction {
 	public static DoubleNode generateRandomDoubleList(int len, int value) {
 		int size = (int) (Math.random() * (len + 1));
 		if (size == 0) {
-			return null;
+			size = 1;
 		}
 		size--;
 		DoubleNode head = new DoubleNode((int) (Math.random() * (value + 1)));

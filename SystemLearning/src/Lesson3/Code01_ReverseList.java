@@ -1,12 +1,9 @@
 package Lesson3;
 
-import Common.NodeFunction.*;
 import static Common.NodeFunction.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Code01_ReverseList {
 	/**
