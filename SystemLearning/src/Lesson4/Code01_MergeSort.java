@@ -1,14 +1,13 @@
 package Lesson4;
 
-import Common.ArrayFunction;
-
-import java.util.Arrays;
 import static Common.ArrayFunction.*;
 
 public class Code01_MergeSort {
-
     /**
-     *      归并排序递归实现
+     * 归并排序递归实现
+     * Master公式：
+     * T(N) = 2 * T(N / 2) + O(N)
+     * 时间复杂度 O(N * logN)
      */
     public static void MergeSort(int[] arr) {
         if (arr.length == 0) return;
@@ -56,16 +55,54 @@ public class Code01_MergeSort {
         int maxValue = 200;
         int testTimes = 100000;
         for (int i = 0; i < testTimes; i++) {
-            int[] arrs1 = generateRandomArray(maxSize, maxValue);
-            int[] arrs2 = copyArray(arrs1);
+            int[] arr1 = generateRandomArray(maxSize, maxValue);
+            int[] arr2 = copyArray(arr1);
             //
-            MergeSort(arrs1);
-            comparator(arrs2);
+            MergeSortByStep(arr1);
+            comparator(arr2);
             //
-            if ( !isEqual(arrs1, arrs2) ) {
+            if (!isEqual(arr1, arr2)) {
                 System.out.println("Failed!");
                 break;
             }
+        }
+    }
+
+    /**
+     * 归并排序非递归实现(步长)
+     */
+    public static void MergeSortByStep(int[] arr) {
+        if (arr.length <= 1) return;
+        processByStep(arr);
+    }
+
+    public static void processByStep(int[] arr) {
+        int arrSize = arr.length;
+        int step = 1;
+        while (step < arrSize) {
+            // 当前左组的下标位置
+            int L = 0;
+            // 以左组下标不超过数组长度为条件循环
+            while (L < arrSize) {
+                // 如果没有右组, 跳出循环
+                // 中间位置已经 >= 数组长度, 没有右值
+                int M = L + step - 1;
+                if (M >= arrSize) {
+                    break;
+                }
+                // 右边位置为 中间位置+步长 与 数组长度 的小值
+                int R = Math.min(M + step, arrSize - 1);
+                // 执行归并排序
+                merge(arr, L, M, R);
+                // 重新设置左组位置
+                L = R + 1;
+            }
+            // 防止 step 越界
+            if (step > (arrSize / 2)) {
+                break;
+            }
+            //
+            step <<= 1;
         }
     }
 }
