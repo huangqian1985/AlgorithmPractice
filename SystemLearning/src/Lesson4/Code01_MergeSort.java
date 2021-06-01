@@ -80,7 +80,7 @@ public class Code01_MergeSort {
         int arrSize = arr.length;
         int step = 1;
         while (step < arrSize) {
-            // 当前左组的下标位置
+            // 当前step下左组的下标位置
             int L = 0;
             // 以左组下标不超过数组长度为条件循环
             while (L < arrSize) {
