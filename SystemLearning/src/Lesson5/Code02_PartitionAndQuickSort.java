@@ -64,7 +64,7 @@ public class Code02_PartitionAndQuickSort {
 			else if (arr[curIndex] < compareValue) {
 				ArrayFunction.Swap(arr, curIndex++, ++lessIndex );
 			}
-			// 如果当前述 > 目标数, 当前数和 > 区域的前一个交换, > 区域向左扩, 当前数不动(因为交换过来的数并未比较)
+			// 如果当前数 > 目标数, 当前数和 > 区域的前一个交换, > 区域向左扩, 当前数不动(因为交换过来的数并未比较)
 			else {
 				ArrayFunction.Swap(arr, curIndex, --largeIndex );
 			}
@@ -75,6 +75,60 @@ public class Code02_PartitionAndQuickSort {
 		return new int[]{lessIndex+1, largeIndex};
 	}
 
+	// 快排1.0
+	public static void quickSort1(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
+		process1(arr, 0, arr.length - 1);
+	}
+	public static void process1(int[] arr, int L, int R) {
+		if (L >= R) {
+			return;
+		}
+		// 从partition返回位置的左右位置开始向下递归
+		int M = partition(arr, L, R);
+		process1(arr, L, M - 1);
+		process1(arr, M + 1, R);
+	}
+
+	// 快排2.0
+	public static void quickSort2(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
+		process2(arr, 0, arr.length - 1);
+	}
+	public static void process2(int[] arr, int L, int R) {
+		if (L >= R) {
+			return;
+		}
+		// 从 netherlandsFlag 返回位置的左右位置开始向下递归
+		int[] equalArea = netherlandsFlag(arr, L, R);
+		process2(arr, L, equalArea[0] - 1);
+		process2(arr, equalArea[1] + 1, R);
+	}
+
+	// 随机快排
+	public static void quickSort3(int[] arr) {
+		if (arr == null || arr.length < 2) {
+			return;
+		}
+		process3(arr, 0, arr.length - 1);
+	}
+	public static void process3(int[] arr, int L, int R) {
+		if (L >= R) {
+			return;
+		}
+		// 快排3.0的核心操作, O(N平方) 变成 O(N * logN)
+		// 随机一个位置和R位置交换
+		int randomPos = (int)(L + Math.random() * (R - L + 1));
+		ArrayFunction.Swap(arr, randomPos, R);
+		// 从 netherlandsFlag 返回位置的左右位置开始向下递归
+		int[] equalArea = netherlandsFlag(arr, L, R);
+		process3(arr, L, equalArea[0] - 1);
+		process3(arr, equalArea[1] + 1, R);
+	}
 
 	public static void main(String[] args) {
 		int[] arr = new int[]{0,5,9,2,4,-1,2,4,3,6,8,3};
