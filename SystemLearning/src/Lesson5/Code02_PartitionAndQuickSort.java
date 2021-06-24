@@ -3,6 +3,7 @@ package Lesson5;
 import Common.ArrayFunction;
 
 import java.util.Arrays;
+import java.util.Stack;
 
 public class Code02_PartitionAndQuickSort {
 
@@ -130,9 +131,43 @@ public class Code02_PartitionAndQuickSort {
 		process3(arr, equalArea[1] + 1, R);
 	}
 
+	// 随机快排非递归
+	public static class OP {
+		public int l;
+		public int r;
+
+		public OP(int l, int r) {
+			this.l = l;
+			this.r = r;
+		}
+	}
+
+	public static void process3_NotRecursion(int[] arr, int L, int R) {
+		if (arr == null || arr.length <= 1 || L >= R) {
+			return;
+		}
+		// 先做一次快排
+		int randomPos = L + (int)( Math.random() * (R - L));
+		ArrayFunction.Swap(arr, randomPos, R);
+		int[] equalArea = netherlandsFlag(arr, L, R);
+		Stack<OP> opStack = new Stack<>();
+		opStack.add(new OP(0, equalArea[0] - 1));
+		opStack.add(new OP(equalArea[1] + 1, R));
+		while (!opStack.isEmpty()) {
+			OP curOP = opStack.pop();
+			if (curOP.l < curOP.r) {
+				int rPos = curOP.l + (int)(Math.random() * (curOP.r - curOP.l + 1));
+				ArrayFunction.Swap(arr, rPos, curOP.r);
+				equalArea = netherlandsFlag(arr, curOP.l, curOP.r);
+				opStack.add(new OP(curOP.l, equalArea[0] - 1));
+				opStack.add(new OP(equalArea[0] + 1, curOP.r));
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		int[] arr = new int[]{0,5,9,2,4,-1,2,4,3,6,8,3};
-		netherlandsFlag(arr, 0, arr.length-1);
+		process3_NotRecursion(arr, 0, arr.length-1);
 		System.out.println(Arrays.toString(arr));
 	}
 }
