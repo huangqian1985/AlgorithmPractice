@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class ArrayFunction {
 
     public static void Swap(int[] arr, int i, int j) {
+        if (i == j) return;
         arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
         arr[i] = arr[i] ^ arr[j];

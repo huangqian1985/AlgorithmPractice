@@ -166,8 +166,22 @@ public class Code02_PartitionAndQuickSort {
 	}
 
 	public static void main(String[] args) {
-		int[] arr = new int[]{0,5,9,2,4,-1,2,4,3,6,8,3};
-		process3_NotRecursion(arr, 0, arr.length-1);
-		System.out.println(Arrays.toString(arr));
+		int testTime = 500000;
+		int maxSize = 100;
+		int maxValue = 100;
+		boolean succeed = true;
+		System.out.println("test begin");
+		for (int i = 0; i < testTime; i++) {
+			int[] arr1 = ArrayFunction.generateRandomArray(maxSize, maxValue);
+			int[] arr2 = ArrayFunction.copyArray(arr1);
+			quickSort1(arr1);
+			process3_NotRecursion(arr2, 0, arr1.length -1);
+			if (!ArrayFunction.isEqual(arr1, arr2)) {
+				succeed = false;
+				break;
+			}
+		}
+		System.out.println("test end");
+		System.out.println("测试" + testTime + "组是否全部通过：" + (succeed ? "是" : "否"));
 	}
 }
