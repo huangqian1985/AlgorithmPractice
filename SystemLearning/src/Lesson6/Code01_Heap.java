@@ -2,13 +2,15 @@ package Lesson6;
 
 import Common.ArrayFunction;
 
+import java.util.Arrays;
+
 /**
- *      堆处理
+ * 堆处理
  */
 public class Code01_Heap {
 
     // 已知数组和新插入的数所在的数组下标索引index, 让数组变为大根堆结构
-    public void heapInsert(int[] arr, int index) {
+    public static void heapInsert(int[] arr, int index) {
         if (arr.length == 0 || index < 1)
             return;
         // 如果当前节点的值 > 当前节点的父节点的值, 进行交换(同样也包括了到了0位置的节点的情况)
@@ -21,7 +23,7 @@ public class Code01_Heap {
     }
 
     // 下沉index位置的元素, 直到子节点都比当前节点的值小
-    public void heapify(int[] arr, int index, int heapSize) {
+    public static void heapify(int[] arr, int index, int heapSize) {
         int leftNodeIndex = index * 2 + 1;
         while (leftNodeIndex < heapSize) {
             // 获取左节点和右节点中较大的节点
@@ -37,5 +39,47 @@ public class Code01_Heap {
             index = largeIndex;
             leftNodeIndex = index * 2 + 1;
         }
+    }
+
+    // 堆排序
+    // 步骤1. 先让整个数组变成大根堆, 数组中最大的数在 index=0 位置
+    // 步骤2. 将 0 位置的数 与 heapSize 位置的数做交换, heapSize--
+    // 重复步骤1
+    public static void heapSort(int[] arr) {
+        if (arr == null || arr.length <= 1)
+            return;
+
+        // 遍历初始arr调用heapInsert将数组变为大根堆
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert(arr, i);
+        }
+
+        int heapSize = arr.length;
+        while (heapSize > 0) {
+            ArrayFunction.Swap(arr, --heapSize, 0);
+            heapify(arr, 0, heapSize);
+        }
+    }
+
+    public static void comparator(int[] arr) {
+        Arrays.sort(arr);
+    }
+
+    public static void main(String[] args) {
+        int testTime = 500000;
+        int maxSize = 100;
+        int maxValue = 100;
+        boolean succeed = true;
+        for (int i = 0; i < testTime; i++) {
+            int[] arr1 = ArrayFunction.generateRandomArray(maxSize, maxValue);
+            int[] arr2 = ArrayFunction.copyArray(arr1);
+            heapSort(arr1);
+            comparator(arr2);
+            if (!ArrayFunction.isEqual(arr1, arr2)) {
+                succeed = false;
+                break;
+            }
+        }
+        System.out.println(succeed ? "Nice!" : "Fucking fucked!");
     }
 }
